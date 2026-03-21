@@ -69,3 +69,4 @@ const CreatePost = () => {
 }
 
 export default CreatePost
+git add .
