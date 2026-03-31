@@ -1,7 +1,29 @@
-
 import React from 'react'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const CreatePost = () => {
+
+  const navigate = useNavigate()
+
+  const handelSubmit = async (e) => {
+    e.preventDefault()
+
+const formData = new FormData(e.target)
+
+axios.post("http://localhost:3000/create-post", formData)
+.then((res)=>{
+  console.log(res)
+  navigate("/feed")
+  
+})
+
+.catch((err)=>{
+  console.log(err)
+  alert("error creating post")
+})
+  }
+
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
       
@@ -17,7 +39,7 @@ const CreatePost = () => {
         </p>
 
         {/* Form */}
-        <form className="flex flex-col gap-6">
+        <form onSubmit={handelSubmit} className="flex flex-col gap-6">
 
           {/* Upload Box */}
           <label className="cursor-pointer">
@@ -45,7 +67,7 @@ const CreatePost = () => {
             required 
             placeholder="Enter caption..."
             rows={4}
-            className="w-full p-4 rounded-2xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-base resize-none"
+            className="w-full h-14  p-4 rounded-2xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-base resize-none"
           />
 
           {/* Button */}
@@ -69,4 +91,4 @@ const CreatePost = () => {
 }
 
 export default CreatePost
-git add .
+
